@@ -65,10 +65,18 @@ python -m unittest discover -s tests -v
 > 当前终端沙箱对“通过子进程写盘”有限制；若运行第 1 步提示权限问题，请在本机终端直接执行，
 > 或批准提权后由助手代为执行。
 
+## 开源与合规
+
+- 本仓以 MIT 授权，见 `LICENSE`。
+- 第三方组件与使用说明见 `THIRD_PARTY_NOTICES.md`。
+- 作品可发布至 GitHub/GitCode；README 中的命令均可离线复现。
+
 ## 文档地图
 
 - 总体方案：[docs/2026-nexent-evolvable-agent-plan.md](docs/2026-nexent-evolvable-agent-plan.md)
 - 开发与项目管理规范：[docs/development-conventions.md](docs/development-conventions.md)
+- 创新提案与联动更新流程：[docs/innovation-process.md](docs/innovation-process.md)
+- 创新提案台账：[docs/innovation-log.md](docs/innovation-log.md)
 - 数据规格与实体映射：[docs/data-spec.md](docs/data-spec.md)
 - Nexent 部署清单：[deploy/nexent-deploy-checklist.md](deploy/nexent-deploy-checklist.md)
 - 本体 Schema：`ontology/schema-v1.json`
