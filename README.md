@@ -1,97 +1,76 @@
-# 衡策 EvoNex — 可进化的制造质量决策智能体
+# 知衡 RuleShift — 多版本中文规程的条件与例外推理
 
-基于华为 ModelEngine **Nexent** 的领域资产认知与决策智能体（赛事/开源项目）。目标是把先进制造企业里沉睡的
-PDF 规程、Excel/CSV 台账、质检图片等异构存量数据，加工成「有 ID、有图谱、可检索、可推理、可追溯、可进化」
-的决策资产，并在 Nexent 平台上完成检索-推理双驱动执行流与 Skill 沉淀。
+本项目由衡策 EvoNex 升级，聚焦制造业不合格品处置与批次放行：给定多版本规程、
+业务事实和目标时间，判断结论是否被支持、否定或无法确定，并定位条件、例外和原文证据。
+研究重点是跨版本“应改变／不应改变”的答案一致性。Nexent 用于后续交互与 MCP 集成。
 
-## 当前开发状态
+## 当前进度（2026-09-07）
 
-**Iteration 1（工程基础 + M1 数据工程 + M3 本体种子）**
+- W1（9 月 7–13 日）：数据治理、来源登记、准入与公开发布检查。
+- EvoNex 可复用基础：合成数据、资产卡片、SQLite 图谱、规则候选抽取、审核逻辑、
+  标准映射差异、证据链渲染、评测函数和回归门。
+- 上一轮 69 项单测通过属于工程测试，不代表真实 NLP 实验效果。
+- 目前 LLM 候选抽取为空接口，演化指标为演示预设，Agent 文件为蓝图。
+- RuleShift 条件例外抽取、版本对齐、NLI、成对监督和历史复核尚待开发。
+- Nexent 曾有启动记录；模型配置、知识库上传和 MCP 端到端联调尚未验收。
 
-**Iteration 2（M2 平台接入代码层 + M3 本体种子）进行中**
+## 本周任务
 
-- [x] 项目骨架与开发规范
-- [x] T1.1 数据规格文档与实体映射
-- [x] T1.2 合成数据生成器（CSV=12、MD=5、PNG=3，可复现）
-- [x] T1.3 资产卡片 Schema、台账格式与校验（8 项单测通过）
-- [x] T1.4 Golden 评测集 v1（10 条）与评测 Harness
-- [x] T2.3 MCP Server 核心逻辑与单测（资产认知/图谱本体/决策证据链）
-- [x] T3.1 本体 Schema v1、标准锚点映射与 25 条种子三元组（27 项单测通过）
-- [x] T3.2 规则驱动候选抽取管线（31 项单测通过，输出 9 条新事实/候选）
-- [x] T3.3 候选审核闭环（自动分流 + 人工审核表，41 项单测通过）
-- [x] T3.4 标准对齐与漂移报告（47 项单测通过）
-- [x] T4.1 检索路由与查询分解（新增 7 项测试，全量 54 项）
-- [x] T4.2 证据链决策工作流与 `evidence-decision` Skill（新增 2 项测试，全量 56 项）
-- [x] T4.3 智能体编排蓝图与自检配置（新增 3 项测试，全量 59 项）
-- [x] T4.4 决策溯源报告与示例输出（新增 2 项测试，全量 61 项）
-- [x] T5.1 离线评测指标与结果评分（新增 5 项测试，全量 66 项）
-- [x] T5.2 版本演化回归门与演示（新增 3 项测试，全量 69 项）
-- [x] T5.3 Skill 模板与跨行业迁移样例（policy-match）
-- [x] T2.1 部署文档、环境模板与就绪检查（实际启动阻塞：本机无 Docker）
-- [x] T2.1 Nexent 实例启动（v2.4.1，大陆镜像源，Web http://localhost:3000 返回 200）
-- [ ] T2.1 模型接入（需模型 API Key：LLM/VLM/Embedding）
-- [x] T2.2 知识库规划、KB manifest 与表格摘要工具（34 项单测通过）
-- [ ] Nexent MCP 联调与 Skill 包完善
-- [ ] T3.3 人工审核闭环
+| 编号 | 工作 | 状态 | 验收 |
+|---|---|---|---|
+| GOV-01 | 范围与新 WBS | 已完成 | 历史判断与新版情景评估明确区分 |
+| GOV-02 | 数据治理 | 待开发 | 研究、训练、外部模型输入、再分发分别授权 |
+| GOV-03 | 来源登记与准入校验 | 待开发 | 默认拒绝不明授权，验证路径、哈希和血缘 |
+| GOV-04 | 发布检查与目录隔离 | 待开发 | 公开目录及 Git 索引受限内容检查 |
 
-## 目录结构
+二级任务完成并验收后，按 AGENTS.md 生成变更总结、提交并推送 GitHub。
+按用户约定，本周 GOV-01～04 完成后暂停开发，不自动进入 W2。
+企业授权、专家标注和真实标准使用许可均需实际证据，不能由技术验收替代。
 
-```text
-.
-├─ docs/                  # 方案、数据规格、开发规范等
-├─ data/                  # 数据说明与静态样例
-├─ scripts/               # 数据生成等可执行脚本
-├─ ontology/              # 本体 Schema、种子三元组、标准映射
-├─ tests/                 # Golden 集、Schema、MCP 核心与一致性测试
-├─ mcp_servers/           # 自建 MCP 服务（核心逻辑 + FastMCP 包装）
-├─ skills/                # 自建 Nexent Skill 包
-├─ deploy/                # Nexent 部署与模型接入说明
-├─ AGENTS.md              # 仓库提交约定
-└─ requirements*.txt
-```
+## 数据原则
 
-## 本地快速开始
+官方材料、企业授权材料、许可科研语料和自编合成材料分别登记。
+来源权威性、用途权限、内容真实性分别审查；公开可访问、摘要改写或代码 MIT 许可不自动赋予数据使用权。
+自然修订、合成挑战、受限企业验证集分别管理和报告。
+历史合成的“2026 标准更新”仅供测试，不代表真实国家标准修订。
 
-环境要求：Python 3.12+（当前无第三方硬依赖即可完成数据/校验）。
+## 路线图
+
+| 阶段 | 内容 | 状态 |
+|---|---|---|
+| W1 | 数据治理、来源登记与准入 | 进行中 |
+| W2–3 | 来源核验、修订样本、标注规范与试标 | 待开发 |
+| W4–5 | 条件抽取、版本对齐、时间检索和实验基线 | 待开发 |
+| W6–7 | NLI、缺失事实、版本对照和证据验证 | 待开发 |
+| W8 | 历史复核、MCP 与 Nexent 联调 | 待开发 |
+| W9–10 | 冻结测试、消融、权威数据试点与交付 | 待开发 |
+
+以上为相对排期。授权语料或领域标注资源未落实时，真实试点不得标记完成。
+
+## 现有离线工具
+
+Python 3.12+，核心逻辑使用标准库。在仓库根目录执行：
 
 ```powershell
-# 1) 生成合成语料（会写入 data/generated/，默认含 CSV/Markdown；可选 matplotlib 图片）
-python scripts\generate_synthetic_data.py
-
-# 2) 只读自检（Schema、本体一致性、Golden 集格式）
-python -m unittest discover -s tests -v
+python -B -m unittest discover -s tests -v
+python -B tests/run_eval.py
+python -B scripts/validate_agent_blueprints.py
 ```
 
-> 当前终端沙箱对“通过子进程写盘”有限制；若运行第 1 步提示权限问题，请在本机终端直接执行，
-> 或批准提权后由助手代为执行。
+`run_eval.py` 当前命令行仅校验 10 条旧 Golden 样本，不运行真实模型评分。
+历史合成数据通过 `python -B scripts/generate_synthetic_data.py` 生成到 `data/generated/`；
+图片生成需要可选 matplotlib。运行 MCP 包装前安装 requirements.txt 中相应依赖。
 
-## 开源与合规
+## 文档入口
 
-- 本仓以 MIT 授权，见 `LICENSE`。
-- 第三方组件与使用说明见 `THIRD_PARTY_NOTICES.md`。
-- 作品可发布至 GitHub/GitCode；README 中的命令均可离线复现。
+- [RuleShift 总体计划与 WBS](docs/ruleshift-development-plan.md)
+- [历史 EvoNex 方案](docs/2026-nexent-evolvable-agent-plan.md)
+- [开发规范](docs/development-conventions.md)
+- [创新流程](docs/innovation-process.md)与[创新台账](docs/innovation-log.md)
+- [历史数据规格](docs/data-spec.md)与[知识库准备](docs/knowledge-base-plan.md)
+- [Nexent 部署清单](deploy/nexent-deploy-checklist.md)
 
-## 文档地图
+## 开源与使用范围
 
-- 总体方案：[docs/2026-nexent-evolvable-agent-plan.md](docs/2026-nexent-evolvable-agent-plan.md)
-- 开发与项目管理规范：[docs/development-conventions.md](docs/development-conventions.md)
-- 创新提案与联动更新流程：[docs/innovation-process.md](docs/innovation-process.md)
-- 创新提案台账：[docs/innovation-log.md](docs/innovation-log.md)
-- 数据规格与实体映射：[docs/data-spec.md](docs/data-spec.md)
-- Nexent 部署清单：[deploy/nexent-deploy-checklist.md](deploy/nexent-deploy-checklist.md)
-- 本体 Schema：`ontology/schema-v1.json`
-- Golden 评测集：`tests/golden/golden_qa_v1.json`
-
-## 里程碑（当前迭代）
-
-| 里程碑 | 内容 | 状态 |
-|---|---|---|
-| M1 | 场景数据、资产卡片、Golden 评测集 | 已完成 |
-| M2 | Nexent 部署、知识库、MCP 接入 | 部署成功、知识库准备完成；模型接入/MCP 联调待 Key 与平台 |
-| M3 | 本体 Schema/种子/候选抽取/审核闭环/标准对齐 | M3 全部完成 |
-| M4 | 检索-推理执行流、Skills、智能体编排 | M4 全部完成 |
-| M5 | 评测回归、演化、模板与开源交付 | T5.1/T5.2/T5.3 完成 |
-| M3 | 本体 v1、候选抽取、人工审核闭环 | 骨架完成 |
-| M4 | 检索-推理执行流、证据链 | 待开发 |
-| M5 | 评测回归与版本演化 | 待开发 |
-| M6 | 开源仓库与路演 | 待开发 |
+代码采用 [MIT](LICENSE)。第三方依赖及数据按各自权利范围使用，详见
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。受限原文、授权合同、密钥和真实企业数据不得提交 Git。

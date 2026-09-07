@@ -1,10 +1,11 @@
-# 开发与项目管理规范（衡策 EvoNex）
+# 开发与项目管理规范（RuleShift / EvoNex）
 
 本文档定义本项目从拆解到交付的约定，作为团队协作与评审的统一依据。
 
 ## 1. 工作分解（WBS）
 
-- 以 `docs/2026-nexent-evolvable-agent-plan.md` 的 M1–M6 模块为基准。
+- 以 [RuleShift 计划](ruleshift-development-plan.md) 为当前基准；EvoNex M1–M6 保留为历史记录。
+- 新任务使用 GOV-/DATA-/NLP-/SYS-/EVAL-/RELEASE- 编号；本周 GOV-01～04 每项验收后提交推送。
 - 子任务编号：`M<模块>-T<任务>`，例如 `T1.2`。实现时可在提交信息中标注，例如
   `feat(data): T1.2 合成数据生成器`。
 - 每个任务必须有：目标、关键步骤、交付物、验收标准、负责人/角色。
