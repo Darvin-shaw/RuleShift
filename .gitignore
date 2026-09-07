@@ -10,8 +10,11 @@ venv/
 .vscode/
 .idea/
 
-# 生成产物（数据可按需强制添加）
+# 生成产物（未经来源准入不得强制添加）
 data/generated/
+data/restricted/
+data/quarantine/
+data/derived/
 *.db
 *.sqlite
 *.log
@@ -24,4 +27,3 @@ data/generated/
 # 系统
 Thumbs.db
 .DS_Store
-

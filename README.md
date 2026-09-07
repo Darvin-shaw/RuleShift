@@ -19,7 +19,7 @@
 | 编号 | 工作 | 状态 | 验收 |
 |---|---|---|---|
 | GOV-01 | 范围与新 WBS | 已完成 | 历史判断与新版情景评估明确区分 |
-| GOV-02 | 数据治理 | 待开发 | 研究、训练、外部模型输入、再分发分别授权 |
+| GOV-02 | 数据治理 | 已完成 | 研究、训练、外部模型输入、再分发分别授权 |
 | GOV-03 | 来源登记与准入校验 | 待开发 | 默认拒绝不明授权，验证路径、哈希和血缘 |
 | GOV-04 | 发布检查与目录隔离 | 待开发 | 公开目录及 Git 索引受限内容检查 |
 
@@ -64,6 +64,7 @@ python -B scripts/validate_agent_blueprints.py
 ## 文档入口
 
 - [RuleShift 总体计划与 WBS](docs/ruleshift-development-plan.md)
+- [数据治理与准入政策](docs/data-governance.md)
 - [历史 EvoNex 方案](docs/2026-nexent-evolvable-agent-plan.md)
 - [开发规范](docs/development-conventions.md)
 - [创新流程](docs/innovation-process.md)与[创新台账](docs/innovation-log.md)
