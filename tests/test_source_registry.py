@@ -112,7 +112,7 @@ class SourceRegistryTest(unittest.TestCase):
         try:
             target.symlink_to(self.root / self.artifact["path"])
         except OSError as exc:
-            self.skipTest(f"Symlink creation unavailable: {exc.winerror}")
+            self.skipTest(f"Symlink creation unavailable: {getattr(exc, 'winerror', exc.errno)}")
         self.artifact["path"] = "data/public/link.txt"
         self.assertIn("artifact_unreadable", self.codes())
 
@@ -176,10 +176,16 @@ class SourceRegistryTest(unittest.TestCase):
         failed = subprocess.run(command + ["--purpose", "training"], capture_output=True)
         self.assertEqual(failed.returncode, 1)
         self.assertIn(b"purpose_denied", failed.stdout)
-        target.write_text("TOP_SECRET_INVALID_JSON", encoding="utf-8")
-        failed = subprocess.run(command, capture_output=True)
-        self.assertEqual(failed.returncode, 1)
-        self.assertNotIn(b"TOP_SECRET", failed.stdout + failed.stderr)
+        for invalid in ("TOP_SECRET_INVALID_JSON", "[" * 1500 + "]" * 1500):
+            target.write_text(invalid, encoding="utf-8")
+            failed = subprocess.run(command, capture_output=True)
+            self.assertEqual(failed.returncode, 1)
+            codes = {item["code"] for item in json.loads(failed.stdout)["issues"]}
+            # A deep but valid JSON array may parse on some Python builds; it
+            # must still fail the manifest schema, without printing a traceback.
+            self.assertTrue(codes & {"manifest_unreadable", "manifest_schema"})
+            self.assertNotIn(b"TOP_SECRET", failed.stdout + failed.stderr)
+            self.assertNotIn(b"Traceback", failed.stderr)
 
 
 if __name__ == "__main__":

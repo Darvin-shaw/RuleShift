@@ -17,3 +17,4 @@
 
 W1 清单为 `sources/manifest.json`，仅含一份原创技术文本；
 使用方法见 [登记接口](../docs/source-registry.md)，限制见 [数据卡](../docs/datasets/w1-fixture.md)。
+公开提交前运行 [发布检查](../docs/data-release-check.md)，同时验证工作区与暂存快照。

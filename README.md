@@ -6,7 +6,8 @@
 
 ## 当前进度（2026-09-07）
 
-- W1（9 月 7–13 日）：数据治理、来源登记、准入与公开发布检查。
+- W1（9 月 7–13 日）：数据治理、来源登记、准入与公开发布检查已完成技术验收。
+- 全量 105 项测试：104 通过、1 因本机缺少符号链接创建权限跳过；Git 链接模式与 Windows junction 测试通过。
 - EvoNex 可复用基础：合成数据、资产卡片、SQLite 图谱、规则候选抽取、审核逻辑、
   标准映射差异、证据链渲染、评测函数和回归门。
 - 上一轮 69 项单测通过属于工程测试，不代表真实 NLP 实验效果。
@@ -21,10 +22,10 @@
 | GOV-01 | 范围与新 WBS | 已完成 | 历史判断与新版情景评估明确区分 |
 | GOV-02 | 数据治理 | 已完成 | 研究、训练、外部模型输入、再分发分别授权 |
 | GOV-03 | 来源登记与准入校验 | 已完成 | 默认拒绝不明授权，验证路径、哈希和血缘 |
-| GOV-04 | 发布检查与目录隔离 | 待开发 | 公开目录及 Git 索引受限内容检查 |
+| GOV-04 | 发布检查与目录隔离 | 已完成 | 公开目录及 Git 索引受限内容检查 |
 
 二级任务完成并验收后，按 AGENTS.md 生成变更总结、提交并推送 GitHub。
-按用户约定，本周 GOV-01～04 完成后暂停开发，不自动进入 W2。
+按用户约定，本周 GOV-01～04 验收推送后暂停开发，不自动进入 W2；等待用户另行启动。
 企业授权、专家标注和真实标准使用许可均需实际证据，不能由技术验收替代。
 
 ## 数据原则
@@ -38,7 +39,7 @@
 
 | 阶段 | 内容 | 状态 |
 |---|---|---|
-| W1 | 数据治理、来源登记与准入 | 进行中 |
+| W1 | 数据治理、来源登记与准入 | 已验收；后续开发暂停 |
 | W2–3 | 来源核验、修订样本、标注规范与试标 | 待开发 |
 | W4–5 | 条件抽取、版本对齐、时间检索和实验基线 | 待开发 |
 | W6–7 | NLI、缺失事实、版本对照和证据验证 | 待开发 |
@@ -57,17 +58,22 @@ python -B tests/run_eval.py
 python -B scripts/validate_agent_blueprints.py
 python -B scripts/source_registry.py --purpose research
 python -B scripts/source_registry.py --purpose redistribution
+python -B scripts/check_data_release.py
 ```
 
 `run_eval.py` 当前命令行仅校验 10 条旧 Golden 样本，不运行真实模型评分。
 历史合成数据通过 `python -B scripts/generate_synthetic_data.py` 生成到 `data/generated/`；
 图片生成需要可选 matplotlib。运行 MCP 包装前安装 requirements.txt 中相应依赖。
 
+发布检查同时检查工作区和 Git 暂存区；提交前须在 `git add -A` 后重跑。
+这是本地检查，不是服务端强制关卡或全仓合规认证。当前公开登记仅含 1 份原创技术样例。
+
 ## 文档入口
 
 - [RuleShift 总体计划与 WBS](docs/ruleshift-development-plan.md)
 - [数据治理与准入政策](docs/data-governance.md)
 - [来源登记接口](docs/source-registry.md)与[W1 原创技术样例数据卡](docs/datasets/w1-fixture.md)
+- [发布检查、提交顺序与限制](docs/data-release-check.md)
 - [历史 EvoNex 方案](docs/2026-nexent-evolvable-agent-plan.md)
 - [开发规范](docs/development-conventions.md)
 - [创新流程](docs/innovation-process.md)与[创新台账](docs/innovation-log.md)

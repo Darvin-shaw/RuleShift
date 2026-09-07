@@ -221,7 +221,7 @@ def main() -> int:
     try:
         manifest = strict_json(read_local(args.root, MANIFEST))
         issues = validate_manifest(manifest, args.root, args.purpose)
-    except (OSError, ValueError, UnicodeError):
+    except (OSError, ValueError, UnicodeError, RecursionError):
         issues = [{"code": "manifest_unreadable", "row": None}]
     print(json.dumps({"ok": not issues, "purpose": args.purpose, "issues": issues}))
     return 1 if issues else 0
