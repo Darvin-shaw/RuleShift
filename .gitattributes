@@ -1,0 +1,3 @@
+# Registry hashes cover exact UTF-8 bytes, reproducible across Windows/Linux.
+data/public/** text eol=lf
+data/sources/*.json text eol=lf

@@ -20,7 +20,7 @@
 |---|---|---|---|
 | GOV-01 | 范围与新 WBS | 已完成 | 历史判断与新版情景评估明确区分 |
 | GOV-02 | 数据治理 | 已完成 | 研究、训练、外部模型输入、再分发分别授权 |
-| GOV-03 | 来源登记与准入校验 | 待开发 | 默认拒绝不明授权，验证路径、哈希和血缘 |
+| GOV-03 | 来源登记与准入校验 | 已完成 | 默认拒绝不明授权，验证路径、哈希和血缘 |
 | GOV-04 | 发布检查与目录隔离 | 待开发 | 公开目录及 Git 索引受限内容检查 |
 
 二级任务完成并验收后，按 AGENTS.md 生成变更总结、提交并推送 GitHub。
@@ -55,6 +55,8 @@ Python 3.12+，核心逻辑使用标准库。在仓库根目录执行：
 python -B -m unittest discover -s tests -v
 python -B tests/run_eval.py
 python -B scripts/validate_agent_blueprints.py
+python -B scripts/source_registry.py --purpose research
+python -B scripts/source_registry.py --purpose redistribution
 ```
 
 `run_eval.py` 当前命令行仅校验 10 条旧 Golden 样本，不运行真实模型评分。
@@ -65,6 +67,7 @@ python -B scripts/validate_agent_blueprints.py
 
 - [RuleShift 总体计划与 WBS](docs/ruleshift-development-plan.md)
 - [数据治理与准入政策](docs/data-governance.md)
+- [来源登记接口](docs/source-registry.md)与[W1 原创技术样例数据卡](docs/datasets/w1-fixture.md)
 - [历史 EvoNex 方案](docs/2026-nexent-evolvable-agent-plan.md)
 - [开发规范](docs/development-conventions.md)
 - [创新流程](docs/innovation-process.md)与[创新台账](docs/innovation-log.md)
