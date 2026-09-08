@@ -43,5 +43,6 @@ python -B scripts/source_registry.py --purpose training
 ```
 
 前两条应通过，第三条应以 1 退出（项目策略禁止训练）。
-本周仅引入 [原创技术样例](datasets/w1-fixture.md)，无真实标准或企业语料。
+W1 引入 [原创技术样例](datasets/w1-fixture.md)；DATA-02 新增
+[修订技术样本](datasets/revision-fixture.md)，均无真实标准或企业语料。
 公共文本固定 LF，以避免 Windows Git 换行转换破坏字节哈希。

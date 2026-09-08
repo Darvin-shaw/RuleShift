@@ -15,6 +15,7 @@
 新增材料按 [数据治理](../docs/data-governance.md) 分别核验权威性、真实性、用途权限。
 目录忽略不是加密或访问控制。历史材料未自动取得 RuleShift 研究准入资格。
 
-W1 清单为 `sources/manifest.json`，仅含一份原创技术文本；
+来源清单为 `sources/manifest.json`，含 W1 原创文本及
+[DATA-02 修订样本](../docs/datasets/revision-fixture.md)；
 使用方法见 [登记接口](../docs/source-registry.md)，限制见 [数据卡](../docs/datasets/w1-fixture.md)。
 公开提交前运行 [发布检查](../docs/data-release-check.md)，同时验证工作区与暂存快照。

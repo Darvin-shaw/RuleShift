@@ -4,10 +4,10 @@
 业务事实和目标时间，判断结论是否被支持、否定或无法确定，并定位条件、例外和原文证据。
 研究重点是跨版本“应改变／不应改变”的答案一致性。Nexent 用于后续交互与 MCP 集成。
 
-## 当前进度（2026-09-07）
+## 当前进度（2026-09-08）
 
 - W1（9 月 7–13 日）：数据治理、来源登记、准入与公开发布检查已完成技术验收。
-- 全量 105 项测试：104 通过、1 因本机缺少符号链接创建权限跳过；Git 链接模式与 Windows junction 测试通过。
+- DATA-02：3 个原创规程族、6 个版本、12 对候选判断；不属于人工 Golden。
 - EvoNex 可复用基础：合成数据、资产卡片、SQLite 图谱、规则候选抽取、审核逻辑、
   标准映射差异、证据链渲染、评测函数和回归门。
 - 上一轮 69 项单测通过属于工程测试，不代表真实 NLP 实验效果。
@@ -25,7 +25,7 @@
 | GOV-04 | 发布检查与目录隔离 | 已完成 | 公开目录及 Git 索引受限内容检查 |
 
 二级任务完成并验收后，按 AGENTS.md 生成变更总结、提交并推送 GitHub。
-按用户约定，本周 GOV-01～04 验收推送后暂停开发，不自动进入 W2；等待用户另行启动。
+2026-09-08 用户要求继续开发，启动 W2–3，优先交付 DATA-02 技术样本。
 企业授权、专家标注和真实标准使用许可均需实际证据，不能由技术验收替代。
 
 ## 数据原则
@@ -39,8 +39,8 @@
 
 | 阶段 | 内容 | 状态 |
 |---|---|---|
-| W1 | 数据治理、来源登记与准入 | 已验收；后续开发暂停 |
-| W2–3 | 来源核验、修订样本、标注规范与试标 | 待开发 |
+| W1 | 数据治理、来源登记与准入 | 已验收 |
+| W2–3 | 来源核验、修订样本、标注规范与试标 | DATA-02 技术样本完成；核验与人工试标待办 |
 | W4–5 | 条件抽取、版本对齐、时间检索和实验基线 | 待开发 |
 | W6–7 | NLI、缺失事实、版本对照和证据验证 | 待开发 |
 | W8 | 历史复核、MCP 与 Nexent 联调 | 待开发 |
@@ -55,6 +55,7 @@ Python 3.12+，核心逻辑使用标准库。在仓库根目录执行：
 ```powershell
 python -B -m unittest discover -s tests -v
 python -B tests/run_eval.py
+python -B scripts/generate_revision_fixture.py --check
 python -B scripts/validate_agent_blueprints.py
 python -B scripts/source_registry.py --purpose research
 python -B scripts/source_registry.py --purpose redistribution
@@ -66,9 +67,11 @@ python -B scripts/check_data_release.py
 图片生成需要可选 matplotlib。运行 MCP 包装前安装 requirements.txt 中相应依赖。
 
 发布检查同时检查工作区和 Git 暂存区；提交前须在 `git add -A` 后重跑。
-这是本地检查，不是服务端强制关卡或全仓合规认证。当前公开登记仅含 1 份原创技术样例。
+这是本地检查，不是服务端强制关卡或全仓合规认证。当前公开登记包含两项原创技术样例来源。
 
 ## 文档入口
+
+- [DATA-02 修订样本数据卡](docs/datasets/revision-fixture.md)
 
 - [RuleShift 总体计划与 WBS](docs/ruleshift-development-plan.md)
 - [数据治理与准入政策](docs/data-governance.md)

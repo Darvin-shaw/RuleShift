@@ -30,6 +30,36 @@
         }
       ],
       "parents": []
+    },
+    {
+      "id": "SYN-REV-001",
+      "class": "S",
+      "title": "DATA-02 原创修订对照技术样本",
+      "origin": "project:original/SYN-REV-001",
+      "license": "MIT",
+      "status": "approved",
+      "review": {
+        "kind": "technical_fixture",
+        "reviewer": "codex:technical-fixture",
+        "reviewed_on": "2026-09-08",
+        "evidence_ref": "docs/datasets/revision-fixture.md"
+      },
+      "permissions": {
+        "research": true,
+        "model_input": true,
+        "training": false,
+        "external_model": false,
+        "redistribution": true
+      },
+      "valid_from": "2026-09-08",
+      "valid_until": null,
+      "artifacts": [
+        {
+          "path": "data/public/SYN-REV-001.json",
+          "sha256": "0eacd8cdb994a7ffecb34005b97f0c5d9c5ce25878511d4b7c9bc000ad06b2f4"
+        }
+      ],
+      "parents": []
     }
   ]
 }

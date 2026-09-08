@@ -20,6 +20,7 @@ class DataReleaseTest(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.manifest = strict_json(read_local(ROOT, MANIFEST))
+        self.manifest["sources"] = self.manifest["sources"][:1]
         self.artifact = self.manifest["sources"][0]["artifacts"][0]
         self.write(self.artifact["path"], read_local(ROOT, self.artifact["path"]))
         self.save_manifest()

@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "source_id": "SYN-REV-001",
+  "families": [
+    {
+      "family_id": "SYN-REV-THRESHOLD",
+      "revision_type": "threshold",
+      "split": "technical_fixture",
+      "versions": [
+        {
+          "version_id": "SYN-REV-THRESHOLD-V1",
+          "valid_from": "2025-01-01",
+          "valid_until": "2025-02-01",
+          "text": "批次缺陷数不超过3时允许放行，否则禁止放行。"
+        },
+        {
+          "version_id": "SYN-REV-THRESHOLD-V2",
+          "valid_from": "2025-02-01",
+          "valid_until": null,
+          "text": "批次缺陷数不超过1时允许放行，否则禁止放行。"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": "SYN-REV-THRESHOLD-P1",
+          "facts": {
+            "defects": 0
+          },
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-THRESHOLD-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "支持",
+              "evidence": "批次缺陷数不超过3时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-THRESHOLD-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "支持",
+              "evidence": "批次缺陷数不超过1时允许放行，否则禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-THRESHOLD-P2",
+          "facts": {
+            "defects": 2
+          },
+          "claim": "该批次允许放行",
+          "expected_change": true,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-THRESHOLD-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "支持",
+              "evidence": "批次缺陷数不超过3时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-THRESHOLD-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "否定",
+              "evidence": "批次缺陷数不超过1时允许放行，否则禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-THRESHOLD-P3",
+          "facts": {
+            "defects": 4
+          },
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-THRESHOLD-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "否定",
+              "evidence": "批次缺陷数不超过3时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-THRESHOLD-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "否定",
+              "evidence": "批次缺陷数不超过1时允许放行，否则禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-THRESHOLD-P4",
+          "facts": {},
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-THRESHOLD-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "无法确定",
+              "evidence": "批次缺陷数不超过3时允许放行，否则禁止放行。",
+              "missing_facts": [
+                "defects"
+              ]
+            },
+            {
+              "version_id": "SYN-REV-THRESHOLD-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "无法确定",
+              "evidence": "批次缺陷数不超过1时允许放行，否则禁止放行。",
+              "missing_facts": [
+                "defects"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family_id": "SYN-REV-EXCEPTION",
+      "revision_type": "exception",
+      "split": "technical_fixture",
+      "versions": [
+        {
+          "version_id": "SYN-REV-EXCEPTION-V1",
+          "valid_from": "2025-01-01",
+          "valid_until": "2025-02-01",
+          "text": "检验合格时允许放行，否则禁止放行。"
+        },
+        {
+          "version_id": "SYN-REV-EXCEPTION-V2",
+          "valid_from": "2025-02-01",
+          "valid_until": null,
+          "text": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": "SYN-REV-EXCEPTION-P1",
+          "facts": {
+            "passed": true,
+            "contaminated": false
+          },
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-EXCEPTION-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "支持",
+              "evidence": "检验合格时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-EXCEPTION-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "支持",
+              "evidence": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-EXCEPTION-P2",
+          "facts": {
+            "passed": true,
+            "contaminated": true
+          },
+          "claim": "该批次允许放行",
+          "expected_change": true,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-EXCEPTION-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "支持",
+              "evidence": "检验合格时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-EXCEPTION-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "否定",
+              "evidence": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-EXCEPTION-P3",
+          "facts": {
+            "passed": false,
+            "contaminated": false
+          },
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-EXCEPTION-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "否定",
+              "evidence": "检验合格时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-EXCEPTION-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "否定",
+              "evidence": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-EXCEPTION-P4",
+          "facts": {
+            "passed": true
+          },
+          "claim": "该批次允许放行",
+          "expected_change": true,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-EXCEPTION-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "支持",
+              "evidence": "检验合格时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-EXCEPTION-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "无法确定",
+              "evidence": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。",
+              "missing_facts": [
+                "contaminated"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family_id": "SYN-REV-WORDING",
+      "revision_type": "wording",
+      "split": "technical_fixture",
+      "versions": [
+        {
+          "version_id": "SYN-REV-WORDING-V1",
+          "valid_from": "2025-01-01",
+          "valid_until": "2025-02-01",
+          "text": "复检合格时允许放行，否则禁止放行。"
+        },
+        {
+          "version_id": "SYN-REV-WORDING-V2",
+          "valid_from": "2025-02-01",
+          "valid_until": null,
+          "text": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": "SYN-REV-WORDING-P1",
+          "facts": {
+            "retested_passed": true
+          },
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-WORDING-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "支持",
+              "evidence": "复检合格时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-WORDING-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "支持",
+              "evidence": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-WORDING-P2",
+          "facts": {
+            "retested_passed": false
+          },
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-WORDING-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "否定",
+              "evidence": "复检合格时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-WORDING-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "否定",
+              "evidence": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-WORDING-P3",
+          "facts": {},
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-WORDING-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "无法确定",
+              "evidence": "复检合格时允许放行，否则禁止放行。",
+              "missing_facts": [
+                "retested_passed"
+              ]
+            },
+            {
+              "version_id": "SYN-REV-WORDING-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "无法确定",
+              "evidence": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。",
+              "missing_facts": [
+                "retested_passed"
+              ]
+            }
+          ]
+        },
+        {
+          "pair_id": "SYN-REV-WORDING-P4",
+          "facts": {
+            "retested_passed": true,
+            "batch_color": "blue"
+          },
+          "claim": "该批次允许放行",
+          "expected_change": false,
+          "judgments": [
+            {
+              "version_id": "SYN-REV-WORDING-V1",
+              "target_time": "2025-01-01",
+              "candidate_label": "支持",
+              "evidence": "复检合格时允许放行，否则禁止放行。",
+              "missing_facts": []
+            },
+            {
+              "version_id": "SYN-REV-WORDING-V2",
+              "target_time": "2025-02-01",
+              "candidate_label": "支持",
+              "evidence": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。",
+              "missing_facts": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

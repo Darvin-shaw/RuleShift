@@ -22,6 +22,7 @@ class SourceRegistryTest(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.manifest = strict_json(read_local(ROOT, MANIFEST))
+        self.manifest["sources"] = self.manifest["sources"][:1]
         self.source = self.manifest["sources"][0]
         self.artifact = self.source["artifacts"][0]
         target = self.root / self.artifact["path"]
