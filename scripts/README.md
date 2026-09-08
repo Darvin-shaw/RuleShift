@@ -3,9 +3,9 @@
 RuleShift W2：
 
 - `generate_revision_fixture.py --check`：检查三个原创规程族、十二对修订样本可复现。
-- `annotation_tasks.py export --output <新目录>`：导出两份各 24 条的空白盲标表，拒绝覆盖已有目录。
-- `annotation_tasks.py check <标注文件>`：检查任务完整性与填写格式；空表失败，不代表人工或语义验收。
-  标注文件保存在仓库外，完整步骤见 [标注规范](../docs/annotation-guide.md)。
+- `ai_annotate.py --output <文件>`：生成带输入哈希、算法版本和机器理由的 AI-only 标签。
+- `ai_annotate.py --check <文件>`：校验标签、证据字段、任务覆盖和机器来源标识。
+  完整流程见 [AI-only 标注协议](../docs/ai-annotation-protocol.md)。
 
 M1 阶段脚本：
 

@@ -60,6 +60,36 @@
         }
       ],
       "parents": []
+    },
+    {
+      "id": "SYN-AI-ANNOTATIONS-001",
+      "class": "S",
+      "title": "AI-only 修订样本标注结果",
+      "origin": "project:original/SYN-AI-ANNOTATIONS-001",
+      "license": "MIT",
+      "status": "approved",
+      "review": {
+        "kind": "technical_fixture",
+        "reviewer": "codex:technical-fixture",
+        "reviewed_on": "2026-09-08",
+        "evidence_ref": "docs/ai-annotation-protocol.md"
+      },
+      "permissions": {
+        "research": true,
+        "model_input": true,
+        "training": false,
+        "external_model": false,
+        "redistribution": true
+      },
+      "valid_from": "2026-09-08",
+      "valid_until": null,
+      "artifacts": [
+        {
+          "path": "data/public/SYN-AI-ANNOTATIONS-001.json",
+          "sha256": "19602761f1e9a07e32649f5b0ca165f6b903241fe0c4a33f9ac4df3a79817b2f"
+        }
+      ],
+      "parents": ["SYN-REV-001"]
     }
   ]
 }

@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "status": "machine_generated",
+  "annotator": "codex-assistant",
+  "algorithm": "codex-rule-projection-v1",
+  "source_sha256": "0eacd8cdb994a7ffecb34005b97f0c5d9c5ce25878511d4b7c9bc000ad06b2f4",
+  "tasks": [
+    {
+      "task_id": "SYN-REV-THRESHOLD-P1:SYN-REV-THRESHOLD-V1",
+      "family_id": "SYN-REV-THRESHOLD",
+      "version_id": "SYN-REV-THRESHOLD-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "defects": 0
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "批次缺陷数不超过3时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-THRESHOLD-P1:SYN-REV-THRESHOLD-V2",
+      "family_id": "SYN-REV-THRESHOLD",
+      "version_id": "SYN-REV-THRESHOLD-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "defects": 0
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "批次缺陷数不超过1时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-THRESHOLD-P2:SYN-REV-THRESHOLD-V1",
+      "family_id": "SYN-REV-THRESHOLD",
+      "version_id": "SYN-REV-THRESHOLD-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "defects": 2
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "批次缺陷数不超过3时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-THRESHOLD-P2:SYN-REV-THRESHOLD-V2",
+      "family_id": "SYN-REV-THRESHOLD",
+      "version_id": "SYN-REV-THRESHOLD-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "defects": 2
+      },
+      "claim": "该批次允许放行",
+      "label": "否定",
+      "evidence": "批次缺陷数不超过1时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实触发条款中的禁止条件。"
+    },
+    {
+      "task_id": "SYN-REV-THRESHOLD-P3:SYN-REV-THRESHOLD-V1",
+      "family_id": "SYN-REV-THRESHOLD",
+      "version_id": "SYN-REV-THRESHOLD-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "defects": 4
+      },
+      "claim": "该批次允许放行",
+      "label": "否定",
+      "evidence": "批次缺陷数不超过3时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实触发条款中的禁止条件。"
+    },
+    {
+      "task_id": "SYN-REV-THRESHOLD-P3:SYN-REV-THRESHOLD-V2",
+      "family_id": "SYN-REV-THRESHOLD",
+      "version_id": "SYN-REV-THRESHOLD-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "defects": 4
+      },
+      "claim": "该批次允许放行",
+      "label": "否定",
+      "evidence": "批次缺陷数不超过1时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实触发条款中的禁止条件。"
+    },
+    {
+      "task_id": "SYN-REV-THRESHOLD-P4:SYN-REV-THRESHOLD-V1",
+      "family_id": "SYN-REV-THRESHOLD",
+      "version_id": "SYN-REV-THRESHOLD-V1",
+      "target_time": "2025-01-01",
+      "facts": {},
+      "claim": "该批次允许放行",
+      "label": "无法确定",
+      "evidence": "批次缺陷数不超过3时允许放行，否则禁止放行。",
+      "missing_facts": [
+        "defects"
+      ],
+      "reason": "缺少决定性事实，无法确定命题。"
+    },
+    {
+      "task_id": "SYN-REV-THRESHOLD-P4:SYN-REV-THRESHOLD-V2",
+      "family_id": "SYN-REV-THRESHOLD",
+      "version_id": "SYN-REV-THRESHOLD-V2",
+      "target_time": "2025-02-01",
+      "facts": {},
+      "claim": "该批次允许放行",
+      "label": "无法确定",
+      "evidence": "批次缺陷数不超过1时允许放行，否则禁止放行。",
+      "missing_facts": [
+        "defects"
+      ],
+      "reason": "缺少决定性事实，无法确定命题。"
+    },
+    {
+      "task_id": "SYN-REV-EXCEPTION-P1:SYN-REV-EXCEPTION-V1",
+      "family_id": "SYN-REV-EXCEPTION",
+      "version_id": "SYN-REV-EXCEPTION-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "passed": true,
+        "contaminated": false
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "检验合格时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-EXCEPTION-P1:SYN-REV-EXCEPTION-V2",
+      "family_id": "SYN-REV-EXCEPTION",
+      "version_id": "SYN-REV-EXCEPTION-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "passed": true,
+        "contaminated": false
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-EXCEPTION-P2:SYN-REV-EXCEPTION-V1",
+      "family_id": "SYN-REV-EXCEPTION",
+      "version_id": "SYN-REV-EXCEPTION-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "passed": true,
+        "contaminated": true
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "检验合格时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-EXCEPTION-P2:SYN-REV-EXCEPTION-V2",
+      "family_id": "SYN-REV-EXCEPTION",
+      "version_id": "SYN-REV-EXCEPTION-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "passed": true,
+        "contaminated": true
+      },
+      "claim": "该批次允许放行",
+      "label": "否定",
+      "evidence": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实触发条款中的禁止条件。"
+    },
+    {
+      "task_id": "SYN-REV-EXCEPTION-P3:SYN-REV-EXCEPTION-V1",
+      "family_id": "SYN-REV-EXCEPTION",
+      "version_id": "SYN-REV-EXCEPTION-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "passed": false,
+        "contaminated": false
+      },
+      "claim": "该批次允许放行",
+      "label": "否定",
+      "evidence": "检验合格时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实触发条款中的禁止条件。"
+    },
+    {
+      "task_id": "SYN-REV-EXCEPTION-P3:SYN-REV-EXCEPTION-V2",
+      "family_id": "SYN-REV-EXCEPTION",
+      "version_id": "SYN-REV-EXCEPTION-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "passed": false,
+        "contaminated": false
+      },
+      "claim": "该批次允许放行",
+      "label": "否定",
+      "evidence": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实触发条款中的禁止条件。"
+    },
+    {
+      "task_id": "SYN-REV-EXCEPTION-P4:SYN-REV-EXCEPTION-V1",
+      "family_id": "SYN-REV-EXCEPTION",
+      "version_id": "SYN-REV-EXCEPTION-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "passed": true
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "检验合格时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-EXCEPTION-P4:SYN-REV-EXCEPTION-V2",
+      "family_id": "SYN-REV-EXCEPTION",
+      "version_id": "SYN-REV-EXCEPTION-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "passed": true
+      },
+      "claim": "该批次允许放行",
+      "label": "无法确定",
+      "evidence": "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。",
+      "missing_facts": [
+        "contaminated"
+      ],
+      "reason": "缺少决定性事实，无法确定命题。"
+    },
+    {
+      "task_id": "SYN-REV-WORDING-P1:SYN-REV-WORDING-V1",
+      "family_id": "SYN-REV-WORDING",
+      "version_id": "SYN-REV-WORDING-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "retested_passed": true
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "复检合格时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-WORDING-P1:SYN-REV-WORDING-V2",
+      "family_id": "SYN-REV-WORDING",
+      "version_id": "SYN-REV-WORDING-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "retested_passed": true
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-WORDING-P2:SYN-REV-WORDING-V1",
+      "family_id": "SYN-REV-WORDING",
+      "version_id": "SYN-REV-WORDING-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "retested_passed": false
+      },
+      "claim": "该批次允许放行",
+      "label": "否定",
+      "evidence": "复检合格时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实触发条款中的禁止条件。"
+    },
+    {
+      "task_id": "SYN-REV-WORDING-P2:SYN-REV-WORDING-V2",
+      "family_id": "SYN-REV-WORDING",
+      "version_id": "SYN-REV-WORDING-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "retested_passed": false
+      },
+      "claim": "该批次允许放行",
+      "label": "否定",
+      "evidence": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实触发条款中的禁止条件。"
+    },
+    {
+      "task_id": "SYN-REV-WORDING-P3:SYN-REV-WORDING-V1",
+      "family_id": "SYN-REV-WORDING",
+      "version_id": "SYN-REV-WORDING-V1",
+      "target_time": "2025-01-01",
+      "facts": {},
+      "claim": "该批次允许放行",
+      "label": "无法确定",
+      "evidence": "复检合格时允许放行，否则禁止放行。",
+      "missing_facts": [
+        "retested_passed"
+      ],
+      "reason": "缺少决定性事实，无法确定命题。"
+    },
+    {
+      "task_id": "SYN-REV-WORDING-P3:SYN-REV-WORDING-V2",
+      "family_id": "SYN-REV-WORDING",
+      "version_id": "SYN-REV-WORDING-V2",
+      "target_time": "2025-02-01",
+      "facts": {},
+      "claim": "该批次允许放行",
+      "label": "无法确定",
+      "evidence": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。",
+      "missing_facts": [
+        "retested_passed"
+      ],
+      "reason": "缺少决定性事实，无法确定命题。"
+    },
+    {
+      "task_id": "SYN-REV-WORDING-P4:SYN-REV-WORDING-V1",
+      "family_id": "SYN-REV-WORDING",
+      "version_id": "SYN-REV-WORDING-V1",
+      "target_time": "2025-01-01",
+      "facts": {
+        "retested_passed": true,
+        "batch_color": "blue"
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "复检合格时允许放行，否则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    },
+    {
+      "task_id": "SYN-REV-WORDING-P4:SYN-REV-WORDING-V2",
+      "family_id": "SYN-REV-WORDING",
+      "version_id": "SYN-REV-WORDING-V2",
+      "target_time": "2025-02-01",
+      "facts": {
+        "retested_passed": true,
+        "batch_color": "blue"
+      },
+      "claim": "该批次允许放行",
+      "label": "支持",
+      "evidence": "若复检结果为合格，则允许放行；若为不合格，则禁止放行。",
+      "missing_facts": [],
+      "reason": "给定事实满足条款条件，未发现阻止结论的例外。"
+    }
+  ]
+}

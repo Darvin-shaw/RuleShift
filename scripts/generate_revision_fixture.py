@@ -1,4 +1,4 @@
-"""Build original revision fixtures; labels are candidates, not human gold."""
+"""Build original revision fixtures for the AI-only annotation pipeline."""
 
 from __future__ import annotations
 

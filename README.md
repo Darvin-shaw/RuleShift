@@ -8,7 +8,7 @@
 
 - W1（9 月 7–13 日）：数据治理、来源登记、准入与公开发布检查已完成技术验收。
 - DATA-02：3 个原创规程族、6 个版本、12 对候选判断；不属于人工 Golden。
-- W2：来源数据库可行性记录、标注规范及 24 条盲标任务导出／校验工具已交付。
+- W2：来源数据库可行性记录及 AI-only 标注协议已交付；24 条技术样本可自动生成标签。
 - EvoNex 可复用基础：合成数据、资产卡片、SQLite 图谱、规则候选抽取、审核逻辑、
   标准映射差异、证据链渲染、评测函数和回归门。
 - 上一轮 69 项单测通过属于工程测试，不代表真实 NLP 实验效果。
@@ -27,9 +27,8 @@
 
 二级任务完成并验收后，按 AGENTS.md 生成变更总结、提交并推送 GitHub。
 2026-09-08 用户要求继续开发，启动 W2–3，优先交付 DATA-02 技术样本。
-最新要求：完成 Week 2 后暂停。W2 技术交付收尾后不进入 W3；真实授权准入、
-50 条人工试标与专家裁决仍待落实，不计为本轮已完成。
-企业授权、专家标注和真实标准使用许可均需实际证据，不能由技术验收替代。
+最新要求：移除手工标注环节，由 Codex 自动处理并保留机器来源、算法版本和输入哈希。
+企业授权和真实标准使用许可仍需实际证据，不能由机器标签替代。
 
 ## 数据原则
 
@@ -43,8 +42,8 @@
 | 阶段 | 内容 | 状态 |
 |---|---|---|
 | W1 | 数据治理、来源登记与准入 | 已验收 |
-| W2 | 候选来源核验、修订样本、标注规范与工具 | 技术交付完成；收尾后暂停 |
-| W3 | 来源授权准入、50 条人工试标与冻结准备 | 暂停；待另行启动 |
+| W2 | 候选来源核验、修订样本与 AI-only 标注 | 已完成；自动标签与结构校验 |
+| W3 | 机器标注扩展、模型基线与冻结评测 | 待开发 |
 | W4–5 | 条件抽取、版本对齐、时间检索和实验基线 | 待开发 |
 | W6–7 | NLI、缺失事实、版本对照和证据验证 | 待开发 |
 | W8 | 历史复核、MCP 与 Nexent 联调 | 待开发 |
@@ -60,6 +59,7 @@ Python 3.12+，核心逻辑使用标准库。在仓库根目录执行：
 python -B -m unittest discover -s tests -v
 python -B tests/run_eval.py
 python -B scripts/generate_revision_fixture.py --check
+python -B scripts/ai_annotate.py --check data/public/SYN-AI-ANNOTATIONS-001.json
 python -B scripts/validate_agent_blueprints.py
 python -B scripts/source_registry.py --purpose research
 python -B scripts/source_registry.py --purpose redistribution
@@ -77,7 +77,7 @@ python -B scripts/check_data_release.py
 
 - [DATA-02 修订样本数据卡](docs/datasets/revision-fixture.md)
 - [来源数据库可行性核验](docs/data-source-feasibility.md)
-- [标注规范与工具](docs/annotation-guide.md)
+- [AI-only 标注协议](docs/ai-annotation-protocol.md)
 
 - [RuleShift 总体计划与 WBS](docs/ruleshift-development-plan.md)
 - [数据治理与准入政策](docs/data-governance.md)
