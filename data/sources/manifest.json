@@ -89,7 +89,9 @@
           "sha256": "19602761f1e9a07e32649f5b0ca165f6b903241fe0c4a33f9ac4df3a79817b2f"
         }
       ],
-      "parents": ["SYN-REV-001"]
+      "parents": [
+        "SYN-REV-001"
+      ]
     },
     {
       "id": "SYN-W3-AI-TRIAL-001",
@@ -116,14 +118,20 @@
       "artifacts": [
         {
           "path": "data/public/SYN-W3-AI-TRIAL-001.json",
-          "sha256": "f763bd7ce9781cd98470beed03cf17af0209cb7970245fda90a3a09cc693f879"
+          "sha256": "a26275ce260f5a53f489c05ba8abd18ae63b3fcf06dfba8f0367b85c5cee5a51"
         },
         {
           "path": "data/public/SYN-W3-AI-TRIAL-ANNOTATIONS-001.json",
-          "sha256": "f6d4cca0f4c131c53472afe3e8a36177809cdd579c4e852cfcd99844d2c290b7"
+          "sha256": "02a189ac1db33652fa6ce09d5981cf93b08d31c78526c851c8d91d3f1c828916"
+        },
+        {
+          "path": "data/public/SYN-W3-FREEZE-001.json",
+          "sha256": "ff27b2c5a8b3a08ee07a4ab38eff9eb07382f5f3f4a2e3b884e28a725ac91d80"
         }
       ],
-      "parents": ["SYN-REV-001"]
+      "parents": [
+        "SYN-REV-001"
+      ]
     }
   ]
 }

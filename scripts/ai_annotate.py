@@ -81,6 +81,7 @@ def validate(result: object, raw: bytes, fixture: dict) -> list[str]:
     if not isinstance(tasks, list) or len(tasks) != len(expected["tasks"]):
         return sorted(errors | {"task_coverage"})
     ids = set()
+    expected_tasks = {t['task_id']: t for t in expected['tasks']}
     for task in tasks:
         if not isinstance(task, dict) or not isinstance(task.get("task_id"), str):
             errors.add("invalid_task")
@@ -88,13 +89,15 @@ def validate(result: object, raw: bytes, fixture: dict) -> list[str]:
         if task["task_id"] in ids:
             errors.add("duplicate_task")
         ids.add(task["task_id"])
-        if task["label"] not in ALLOWED:
+        if task != expected_tasks.get(task['task_id']):
+            errors.add("projection_mismatch")
+        if not isinstance(task.get("label"), str) or task["label"] not in ALLOWED:
             errors.add("invalid_label")
-        if not isinstance(task["evidence"], str) or not task["evidence"].strip():
+        if not isinstance(task.get("evidence"), str) or not task["evidence"].strip():
             errors.add("invalid_evidence")
-        if task["label"] == "无法确定" and not task["missing_facts"]:
+        if task.get("label") == "无法确定" and not task.get("missing_facts"):
             errors.add("missing_fact_reason")
-        if task["label"] != "无法确定" and task["missing_facts"]:
+        if task.get("label") != "无法确定" and task.get("missing_facts"):
             errors.add("unexpected_missing_facts")
     if ids != {t["task_id"] for t in expected["tasks"]}:
         errors.add("task_coverage")

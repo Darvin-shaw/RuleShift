@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "source": "data/public/SYN-W3-AI-TRIAL-001.json",
+  "freeze": "data/public/SYN-W3-FREEZE-001.json",
+  "split": "test",
+  "models": ["majority", "rule_text"],
+  "output": "data/generated/w3-eval.json"
+}

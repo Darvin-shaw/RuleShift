@@ -1,0 +1,34 @@
+name: Update stargazers
+on:
+  watch:
+    types: [started]
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: update-stargazers
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Synchronize list
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/update_stargazers.py --summary
+      - name: Review and commit changes
+        run: |
+          git diff
+          git add -A
+          git diff --cached
+          if git diff --cached --quiet; then exit 0; fi
+          python3 scripts/check_data_release.py
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'docs: synchronize stargazers'
+          git push

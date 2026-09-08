@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "dataset_version": "w3-v2",
+  "source_sha256": "a26275ce260f5a53f489c05ba8abd18ae63b3fcf06dfba8f0367b85c5cee5a51",
+  "task_count": 50,
+  "splits": {
+    "train": ["SYN-W3-THRESHOLD", "SYN-W3-EXCEPTION"],
+    "dev": ["SYN-W3-SCORE"],
+    "test": ["SYN-W3-APPROVAL", "SYN-W3-WAIVER"]
+  }
+}

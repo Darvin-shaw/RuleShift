@@ -1,61 +1,73 @@
-"""Build a deterministic 50-task AI-only synthetic trial set."""
-
-from __future__ import annotations
+"""Build 25 distinct version pairs for the frozen synthetic W3 benchmark."""
 
 import argparse
-import copy
 import json
 from pathlib import Path
 
-if __package__:
-    from .generate_revision_fixture import OUTPUT as BASE
-else:
-    from generate_revision_fixture import OUTPUT as BASE
-
-
-ROOT = BASE.parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data/public/SYN-W3-AI-TRIAL-001.json"
 
 
 def build_trial() -> dict:
-    """Keep the 24 W2 tasks and add 26 independent synthetic fact combinations."""
-    source = json.loads(BASE.read_bytes())
-    families = copy.deepcopy(source["families"])
-    extra = {
-        "SYN-REV-THRESHOLD": [
-            ({"defects": value}, "支持" if value <= 3 else "否定", "支持" if value <= 1 else "否定", [])
-            for value in range(5)
-        ],
-        "SYN-REV-EXCEPTION": [
-            ({"passed": passed, "contaminated": contaminated},
-             "支持" if passed else "否定",
-             "支持" if passed and not contaminated else "否定",
-             [])
-            for passed, contaminated in ((True, True), (False, True), (True, False), (False, False))
-        ],
-        "SYN-REV-WORDING": [
-            ({"retested_passed": value, "line": f"L{i}"},
-             "支持" if value else "否定", "支持" if value else "否定", [])
-            for i, value in enumerate((True, False, True, False))
-        ],
-    }
-    for family in families:
-        cases = extra[family["family_id"]]
-        for offset, (facts, old, new, missing) in enumerate(cases, len(family["pairs"]) + 1):
-            versions = family["versions"]
-            family["pairs"].append({
-                "pair_id": f"{family['family_id']}-W3P{offset}",
-                "facts": facts,
-                "claim": "该批次允许放行",
-                "expected_change": old != new,
-                "judgments": [
-                    {"version_id": version["version_id"], "target_time": version["valid_from"],
-                     "candidate_label": label, "evidence": version["text"],
-                     "missing_facts": missing if label == "无法确定" else []}
-                    for version, label in zip(versions, (old, new))
-                ],
-            })
-    return {"schema_version": 1, "source_id": "SYN-W3-AI-TRIAL-001", "families": families}
+    """Each family has five relevant fact combinations and two versions."""
+    specs = [
+        ("THRESHOLD", "threshold", [
+            "批次缺陷数不超过3时允许放行，否则禁止放行。",
+            "批次缺陷数不超过1时允许放行，否则禁止放行。"], [
+            ({"defects": 0}, "支持", "支持", [], []),
+            ({"defects": 1}, "支持", "支持", [], []),
+            ({"defects": 2}, "支持", "否定", [], []),
+            ({"defects": 4}, "否定", "否定", [], []),
+            ({}, "无法确定", "无法确定", ["defects"], ["defects"])]),
+        ("EXCEPTION", "exception", [
+            "检验合格时允许放行，否则禁止放行。",
+            "检验合格时允许放行；但发生污染时禁止放行。检验不合格时禁止放行。"], [
+            ({"passed": True, "contaminated": False}, "支持", "支持", [], []),
+            ({"passed": True, "contaminated": True}, "支持", "否定", [], []),
+            ({"passed": False, "contaminated": False}, "否定", "否定", [], []),
+            ({"passed": True}, "支持", "无法确定", [], ["contaminated"]),
+            ({"contaminated": False}, "无法确定", "无法确定", ["passed"], ["passed"])]),
+        ("SCORE", "wording", [
+            "复检评分至少80分时允许放行，否则禁止放行。",
+            "复检评分达到80分时允许放行，否则禁止放行。"], [
+            ({"score": 79}, "否定", "否定", [], []),
+            ({"score": 80}, "支持", "支持", [], []),
+            ({"score": 81}, "支持", "支持", [], []),
+            ({"score": 0}, "否定", "否定", [], []),
+            ({}, "无法确定", "无法确定", ["score"], ["score"])]),
+        ("APPROVAL", "condition_added", [
+            "复检合格时允许放行，否则禁止放行。",
+            "复检合格且审批通过时允许放行，否则禁止放行。"], [
+            ({"retested_passed": True, "approved": True}, "支持", "支持", [], []),
+            ({"retested_passed": True, "approved": False}, "支持", "否定", [], []),
+            ({"retested_passed": False, "approved": True}, "否定", "否定", [], []),
+            ({"retested_passed": True}, "支持", "无法确定", [], ["approved"]),
+            ({"approved": True}, "无法确定", "无法确定", ["retested_passed"], ["retested_passed"])]),
+        ("WAIVER", "alternative_added", [
+            "复检合格时允许放行，否则禁止放行。",
+            "复检合格或让步获准时允许放行，否则禁止放行。"], [
+            ({"retested_passed": True, "waiver": False}, "支持", "支持", [], []),
+            ({"retested_passed": False, "waiver": True}, "否定", "支持", [], []),
+            ({"retested_passed": False, "waiver": False}, "否定", "否定", [], []),
+            ({"retested_passed": False}, "否定", "无法确定", [], ["waiver"]),
+            ({"waiver": False}, "无法确定", "无法确定", ["retested_passed"], ["retested_passed"])]),
+    ]
+    families = []
+    for name, kind, texts, cases in specs:
+        fid = f"SYN-W3-{name}"
+        versions = [dict(version_id=f"{fid}-V{i+1}", text=text,
+                         valid_from=f"2025-0{i+1}-01",
+                         valid_until="2025-02-01" if i == 0 else None)
+                    for i, text in enumerate(texts)]
+        pairs = [dict(pair_id=f"{fid}-P{i+1}", facts=facts, claim="该批次允许放行",
+                      expected_change=old != new, judgments=[
+                          dict(version_id=v["version_id"], target_time=v["valid_from"],
+                               candidate_label=label, evidence=v["text"], missing_facts=missing)
+                          for v, label, missing in zip(versions, (old, new), (m1, m2))])
+                 for i, (facts, old, new, m1, m2) in enumerate(cases)]
+        families.append(dict(family_id=fid, revision_type=kind, split="technical_fixture",
+                             versions=versions, pairs=pairs))
+    return dict(schema_version=1, source_id="SYN-W3-AI-TRIAL-001", families=families)
 
 
 def main() -> int:
@@ -65,10 +77,9 @@ def main() -> int:
     content = (json.dumps(build_trial(), ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     if args.check:
         ok = OUTPUT.is_file() and OUTPUT.read_bytes() == content
-        print("AI trial fixture: 50 tasks" if ok else "AI trial fixture missing or stale")
-        return 0 if ok else 1
+        print("W3: 5 families, 25 pairs, 50 judgments" if ok else "fixture missing or stale")
+        return int(not ok)
     OUTPUT.write_bytes(content)
-    print("generated data/public/SYN-W3-AI-TRIAL-001.json")
     return 0
 
 
