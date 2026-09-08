@@ -90,6 +90,40 @@
         }
       ],
       "parents": ["SYN-REV-001"]
+    },
+    {
+      "id": "SYN-W3-AI-TRIAL-001",
+      "class": "S",
+      "title": "W3 AI-only 五十条合成试验集",
+      "origin": "project:original/SYN-W3-AI-TRIAL-001",
+      "license": "MIT",
+      "status": "approved",
+      "review": {
+        "kind": "technical_fixture",
+        "reviewer": "codex:technical-fixture",
+        "reviewed_on": "2026-09-08",
+        "evidence_ref": "docs/ai-annotation-protocol.md"
+      },
+      "permissions": {
+        "research": true,
+        "model_input": true,
+        "training": false,
+        "external_model": false,
+        "redistribution": true
+      },
+      "valid_from": "2026-09-08",
+      "valid_until": null,
+      "artifacts": [
+        {
+          "path": "data/public/SYN-W3-AI-TRIAL-001.json",
+          "sha256": "f763bd7ce9781cd98470beed03cf17af0209cb7970245fda90a3a09cc693f879"
+        },
+        {
+          "path": "data/public/SYN-W3-AI-TRIAL-ANNOTATIONS-001.json",
+          "sha256": "f6d4cca0f4c131c53472afe3e8a36177809cdd579c4e852cfcd99844d2c290b7"
+        }
+      ],
+      "parents": ["SYN-REV-001"]
     }
   ]
 }

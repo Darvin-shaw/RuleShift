@@ -18,8 +18,8 @@ ALLOWED = {"支持", "否定", "无法确定"}
 ALGORITHM = "codex-rule-projection-v1"
 
 
-def load_source() -> tuple[bytes, dict]:
-    raw = SOURCE.read_bytes()
+def load_source(path: Path = SOURCE) -> tuple[bytes, dict]:
+    raw = path.read_bytes()
     return raw, json.loads(raw)
 
 
@@ -105,11 +105,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--check", type=Path)
+    parser.add_argument("--source", type=Path, default=SOURCE)
     args = parser.parse_args()
     if bool(args.output) == bool(args.check):
         parser.error("choose exactly one of --output or --check")
     try:
-        raw, fixture = load_source()
+        raw, fixture = load_source(args.source)
         if args.output:
             args.output.write_text(json.dumps(build_annotations(raw, fixture), ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
             issues = []

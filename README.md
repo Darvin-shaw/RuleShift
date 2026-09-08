@@ -9,6 +9,7 @@
 - W1（9 月 7–13 日）：数据治理、来源登记、准入与公开发布检查已完成技术验收。
 - DATA-02：3 个原创规程族、6 个版本、12 对候选判断；不属于人工 Golden。
 - W2：来源数据库可行性记录及 AI-only 标注协议已交付；24 条技术样本可自动生成标签。
+- W3：50 条独立合成试验任务及机器标注结果已生成并通过结构校验。
 - EvoNex 可复用基础：合成数据、资产卡片、SQLite 图谱、规则候选抽取、审核逻辑、
   标准映射差异、证据链渲染、评测函数和回归门。
 - 上一轮 69 项单测通过属于工程测试，不代表真实 NLP 实验效果。
@@ -43,7 +44,7 @@
 |---|---|---|
 | W1 | 数据治理、来源登记与准入 | 已验收 |
 | W2 | 候选来源核验、修订样本与 AI-only 标注 | 已完成；自动标签与结构校验 |
-| W3 | 机器标注扩展、模型基线与冻结评测 | 待开发 |
+| W3 | 机器标注扩展、模型基线与冻结评测 | 机器标注扩展已完成；基线与冻结评测待开发 |
 | W4–5 | 条件抽取、版本对齐、时间检索和实验基线 | 待开发 |
 | W6–7 | NLI、缺失事实、版本对照和证据验证 | 待开发 |
 | W8 | 历史复核、MCP 与 Nexent 联调 | 待开发 |
@@ -60,6 +61,8 @@ python -B -m unittest discover -s tests -v
 python -B tests/run_eval.py
 python -B scripts/generate_revision_fixture.py --check
 python -B scripts/ai_annotate.py --check data/public/SYN-AI-ANNOTATIONS-001.json
+python -B scripts/generate_ai_trial_set.py --check
+python -B scripts/ai_annotate.py --source data/public/SYN-W3-AI-TRIAL-001.json --check data/public/SYN-W3-AI-TRIAL-ANNOTATIONS-001.json
 python -B scripts/validate_agent_blueprints.py
 python -B scripts/source_registry.py --purpose research
 python -B scripts/source_registry.py --purpose redistribution
@@ -78,6 +81,7 @@ python -B scripts/check_data_release.py
 - [DATA-02 修订样本数据卡](docs/datasets/revision-fixture.md)
 - [来源数据库可行性核验](docs/data-source-feasibility.md)
 - [AI-only 标注协议](docs/ai-annotation-protocol.md)
+- [W3 五十条 AI 试验集](docs/datasets/w3-ai-trial.md)
 
 - [RuleShift 总体计划与 WBS](docs/ruleshift-development-plan.md)
 - [数据治理与准入政策](docs/data-governance.md)

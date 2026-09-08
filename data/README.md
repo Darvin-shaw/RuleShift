@@ -22,4 +22,4 @@
 
 W2 的[来源可行性记录](../docs/data-source-feasibility.md)仅包含候选元数据与许可分析，
 未自动导入外部数据库正文。标签由 [AI-only 协议](../docs/ai-annotation-protocol.md)生成，
-24 条合成判断标记为 `machine_generated`，不冒充人工或专家结果。
+W2 的 24 条和 W3 的 50 条合成判断均标记为 `machine_generated`，不冒充人工或专家结果。

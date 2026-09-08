@@ -20,11 +20,13 @@
 ```powershell
 python -B scripts/ai_annotate.py --output data/public/SYN-AI-ANNOTATIONS-001.json
 python -B scripts/ai_annotate.py --check data/public/SYN-AI-ANNOTATIONS-001.json
+python -B scripts/generate_ai_trial_set.py --check
+python -B scripts/ai_annotate.py --source data/public/SYN-W3-AI-TRIAL-001.json --check data/public/SYN-W3-AI-TRIAL-ANNOTATIONS-001.json
 ```
 
 输出包含输入样本哈希、算法版本、任务 ID、标签、证据、缺失事实和机器理由。
-校验失败时返回非零退出码，不回显输入原文。当前技术样本为 24 条；扩充样本时必须增加独立
-规程事实，不能复制任务凑数。该流程不模拟人工身份，不生成授权或专家签名。
+校验失败时返回非零退出码，不回显输入原文。当前 W2 样本为 24 条，W3 合成试验集为 50 条；
+扩充样本时必须增加独立规程事实，不能复制任务凑数。该流程不模拟人工身份，不生成授权或专家签名。
 
 ## 适用边界
 

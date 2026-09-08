@@ -6,6 +6,7 @@ RuleShift W2：
 - `ai_annotate.py --output <文件>`：生成带输入哈希、算法版本和机器理由的 AI-only 标签。
 - `ai_annotate.py --check <文件>`：校验标签、证据字段、任务覆盖和机器来源标识。
   完整流程见 [AI-only 标注协议](../docs/ai-annotation-protocol.md)。
+- `generate_ai_trial_set.py --check`：检查 W3 的 50 条独立合成试验任务可复现。
 
 M1 阶段脚本：
 

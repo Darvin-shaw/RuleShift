@@ -5,6 +5,7 @@ import json
 import unittest
 
 from scripts.ai_annotate import ALGORITHM, build_annotations, load_source, validate
+from scripts.generate_ai_trial_set import OUTPUT as TRIAL
 
 
 class AIAnnotationTests(unittest.TestCase):
@@ -33,3 +34,9 @@ class AIAnnotationTests(unittest.TestCase):
         changed["annotator"] = "expert"
         self.assertIn("invalid_status", validate(changed, self.raw, self.fixture))
         self.assertIn("invalid_annotator", validate(changed, self.raw, self.fixture))
+
+    def test_w3_trial_set_has_fifty_machine_tasks(self):
+        raw, fixture = load_source(TRIAL)
+        result = build_annotations(raw, fixture)
+        self.assertEqual(len(result["tasks"]), 50)
+        self.assertEqual(validate(result, raw, fixture), [])
