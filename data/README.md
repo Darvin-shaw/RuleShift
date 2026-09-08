@@ -19,3 +19,7 @@
 [DATA-02 修订样本](../docs/datasets/revision-fixture.md)；
 使用方法见 [登记接口](../docs/source-registry.md)，限制见 [数据卡](../docs/datasets/w1-fixture.md)。
 公开提交前运行 [发布检查](../docs/data-release-check.md)，同时验证工作区与暂存快照。
+
+W2 的[来源可行性记录](../docs/data-source-feasibility.md)仅包含候选元数据与许可分析，
+未自动导入外部数据库正文。标注准备见[规范](../docs/annotation-guide.md)；
+24 条合成判断尚非 50 条人工试标集，填写后的标注文件保存在仓库外。
