@@ -80,6 +80,8 @@ docs/          设计、数据和开发文档
 评测入口为 [run_w3_eval.py](scripts/run_w3_eval.py)，规则解析位于
 [w3_baselines.py](scripts/w3_baselines.py)。参考标签与预测输入分开处理，数据按规程族划分。
 
+受控句式的条件与例外抽取见 [规则抽取接口](docs/rule-extraction.md)，支持嵌套条件及原文位置输出。
+
 ### 本地检查
 
 在仓库根目录执行：
