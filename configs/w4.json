@@ -1,0 +1,5 @@
+{
+  "source": "data/public/SYN-W3-AI-TRIAL-001.json",
+  "output": "data/generated/w4-report.json",
+  "similarity_threshold": 0.65
+}
