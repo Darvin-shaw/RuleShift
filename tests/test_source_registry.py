@@ -93,6 +93,16 @@ class SourceRegistryTest(unittest.TestCase):
         self.source["review"]["reviewed_on"] = "2026-09-08"
         self.assertIn("future_review", self.codes())
 
+    def test_machine_review_preserves_permission_and_hash_checks(self):
+        self.source['class'] = 'A'
+        self.source['review'].update(kind='machine', reviewer='codex:source-check')
+        self.assertEqual(self.codes(), set())
+        self.assertIn('purpose_denied', self.codes('training'))
+        self.artifact['sha256'] = '0' * 64
+        self.assertIn('hash_mismatch', self.codes())
+        self.source['review']['reviewer'] = 'invented expert'
+        self.assertIn('machine_review_identity', self.codes())
+
     def test_hash_tampering_and_missing_file(self):
         target = self.root / self.artifact["path"]
         target.write_text("Changed", encoding="utf-8")

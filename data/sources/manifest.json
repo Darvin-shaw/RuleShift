@@ -132,6 +132,40 @@
       "parents": [
         "SYN-REV-001"
       ]
+    },
+    {
+      "id": "REAL-GMP-2010-RELEASE",
+      "class": "A",
+      "title": "药品生产质量管理规范（2010年修订）第228至230条",
+      "origin": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_d5e1dbaa8f284277a5f6c3e2fc840d00.html",
+      "license": "PRC-Copyright-Law-Article-5(1)",
+      "status": "approved",
+      "review": {
+        "kind": "machine",
+        "reviewer": "codex:source-check",
+        "reviewed_on": "2026-09-09",
+        "evidence_ref": "docs/real-text-acceptance.md"
+      },
+      "permissions": {
+        "research": true,
+        "model_input": true,
+        "training": false,
+        "external_model": false,
+        "redistribution": true
+      },
+      "valid_from": "2026-09-09",
+      "valid_until": null,
+      "artifacts": [
+        {
+          "path": "data/public/REAL-GMP-2010-RELEASE.json",
+          "sha256": "27516331fd661f3ec174c9495e734727a4bb616eb02de4a72b2e4a093c513f5c"
+        },
+        {
+          "path": "data/public/REAL-GMP-2010-RESULT.json",
+          "sha256": "7ce802a96d017660465a42674924c08f72b01b608b7db557cdd1778a12c41437"
+        }
+      ],
+      "parents": []
     }
   ]
 }

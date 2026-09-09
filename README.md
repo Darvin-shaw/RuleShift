@@ -83,6 +83,7 @@ docs/          设计、数据和开发文档
 受控句式的条件与例外抽取见 [规则抽取接口](docs/rule-extraction.md)。
 运行 `python -B scripts/run_w4.py` 可生成条件树与版本对应报告，支持条款修改、措辞变化和结构拆合；
 配置及匹配边界见 [版本对齐说明](docs/w4-development.md)。
+真实规章的初步检查尚未通过，结果与限制见 [真实文本验收](docs/real-text-acceptance.md)。
 
 ### 本地检查
 

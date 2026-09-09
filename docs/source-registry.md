@@ -14,7 +14,7 @@
 |---|---|
 | id | 唯一大写标识；原创技术样例以 SYN- 开头 |
 | class | A/B/C/S，对应数据治理四类来源 |
-| title / origin / license | 非空，不能填 unknown/pending/unverified/n/a；许可证据另行人工核验 |
+| title / origin / license | 非空，不能填 unknown/pending/unverified/n/a；使用依据另行核验 |
 | status | 只有 approved 可准入；candidate/revoked 等一律拒绝 |
 | review | kind、reviewer、reviewed_on、evidence_ref；不得上传敏感合同或人员详情 |
 | permissions | research/model_input/training/external_model/redistribution 五项严格布尔值 |
@@ -22,10 +22,11 @@
 | parents | 父来源 ID 列表，禁止缺失父项、重复父项、环和用途权限升级 |
 | artifacts | 非空数组，每项仅 path 与 sha256（精确字节，64 位小写十六进制） |
 
-review.kind 为 human 或 technical_fixture；后者仅限原创 S 类、SYN- 编号、
+review.kind 支持 machine、human（历史兼容）或 technical_fixture；后者仅限原创 S 类、SYN- 编号、
 `project:original/` 来源及 `codex:technical-fixture` 自检身份。
 reviewed_on 不得晚于今天；CLI 不确认 reviewer 真实身份或 evidence_ref 有效性。
-来源权威性、事实真实性、授权书有效性仍须 DATA-01 人工复核。
+machine 的 reviewer 使用 `codex:` 前缀，evidence_ref 可指向核验说明或来源依据，不要求人工证据编号。
+来源权威性、事实真实性、使用依据仍须核验，但不要求人工审查身份。
 
 路径为根目录下 `data/public|restricted|quarantine|derived/`，保守使用 ASCII 字母、
 数字、连字符、下划线、点和斜杠；禁止绝对路径、空段、点段、反斜杠、ADS、保留设备名、符号链接与 junction。

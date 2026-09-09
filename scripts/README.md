@@ -10,6 +10,7 @@ RuleShift W2：
 - `run_w3_eval.py`：运行冻结基线，见 [W3 评测](../docs/w3-evaluation.md)。
 - `run_w4.py`：批量抽取与版本对齐，见 [W4 配置与接口](../docs/w4-development.md)。
 - `extract_rules.py <文件>`：抽取单条规程，见 [支持语法](../docs/rule-extraction.md)。
+- `check_real_text.py --source <文件>`：检查已登记真实正文的解析覆盖率，见 [验收记录](../docs/real-text-acceptance.md)。
 
 M1 阶段脚本：
 

@@ -1,0 +1,35 @@
+{
+  "total": 3,
+  "parsed": 0,
+  "coverage": 0.0,
+  "minimum_coverage": 0.8,
+  "decision": "not_passed",
+  "semantic_accuracy": null,
+  "version_alignment": null,
+  "rows": [
+    {
+      "id": "228",
+      "text_sha256": "83cc19d4b4598a35c625c24e810c1bf2a4dfe58c9acfb26a6d0ccdedbbd6e5de",
+      "status": "unsupported",
+      "reason": "expected one release condition"
+    },
+    {
+      "id": "229",
+      "text_sha256": "5701e9486d41c0d22d7f254b0a0e9e0f506d06100907013b64ea56534707ae82",
+      "status": "unsupported",
+      "reason": "expected one release condition"
+    },
+    {
+      "id": "230",
+      "text_sha256": "135f3fb7c8098d29b8ee3edbabeb9ca1d783f4ffb6c8ef995830c6788f17255a",
+      "status": "unsupported",
+      "reason": "use explicit 且 or 或 operators"
+    }
+  ],
+  "source_id": "REAL-GMP-2010-RELEASE",
+  "source_sha256": "27516331fd661f3ec174c9495e734727a4bb616eb02de4a72b2e4a093c513f5c",
+  "code_sha256": {
+    "extract_rules.py": "425169c903a8fc6158e8b8b8237f49975b2c1b9f3f43576bfdd0c6d3b46be5f0",
+    "check_real_text.py": "14b16a66688d42beb35471ae137f0da0bcf895cc4bb9ebd8a2fa90f4dc5f5ea7"
+  }
+}

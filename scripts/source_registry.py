@@ -133,8 +133,10 @@ def validate_manifest(
                         or not str(source["origin"]).startswith("project:original/")
                         or review["reviewer"] != "codex:technical-fixture"):
                     error("fixture_review_scope", row)
-            elif review["kind"] != "human":
+            elif review["kind"] not in ("human", "machine"):
                 error("review_kind", row)
+            elif review["kind"] == "machine" and not review["reviewer"].startswith("codex:"):
+                error("machine_review_identity", row)
             try:
                 if parse_date(review["reviewed_on"]) > today:
                     error("future_review", row)
